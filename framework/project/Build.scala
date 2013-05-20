@@ -272,7 +272,7 @@ object PlayBuild extends Build {
     .settings(playCommonSettings: _*)
     .settings(
       libraryDependencies := (runtime ++ jdbcDeps),
-      cleanFiles ++= Seq(file("../dist"), file("../repository/local")),
+      cleanFiles <++= (baseDirectory)(bd => Seq(bd.getParentFile / "dist", bd.getParentFile / "repository" / "local")),
       generateAPIDocsTask,
       publish := {},
       generateDistTask

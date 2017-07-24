@@ -46,7 +46,7 @@ trait IdleTimeoutSpec extends PlaySpecification with ServerIntegrationSpecificat
     def withServer[T](httpTimeout: Duration, httpsPort: Option[Int] = None, httpsTimeout: Duration = Duration.Inf)(action: EssentialAction)(block: Port => T) = {
       val port = testServerPort
       val props = new Properties(System.getProperties)
-      props.putAll(timeouts(httpTimeout, httpsTimeout).asJava)
+      (props: java.utl.Map[Object, Object]).putAll(timeouts(httpTimeout, httpsTimeout).asJava)
       val serverConfig = ServerConfig(port = Some(port), sslPort = httpsPort, mode = Mode.Test, properties = props)
       running(play.api.test.TestServer(
         config = serverConfig,
